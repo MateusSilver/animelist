@@ -10,7 +10,7 @@ datasource db {
 model Anime {
   id       String   @id @default(cuid())
   name     String
-  seasons  String
+  season   Int
   type     String
   studio   String
   sinopsis String
