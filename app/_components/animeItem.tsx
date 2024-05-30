@@ -1,17 +1,23 @@
+"use client";
 import { Anime } from "@prisma/client";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
+import { useRouter } from "next/navigation";
 
 interface AnimeItemProps {
   anime: Anime;
 }
 
 const AnimeItem = ({ anime }: AnimeItemProps) => {
+  const router = useRouter();
+  const handleAnimeClick = () => {
+    router.push(`animes/${anime.id}`);
+  };
   return (
     <Card className="min-w-[400px] max-w-[400px] rounded-none">
       <CardContent className=" p-0 flex flex-row">
-        <div className="w-1/3 h-full">
+        <div onClick={handleAnimeClick} className="w-1/3 h-full cursor-pointer">
           <Image
             src={anime.coverURL}
             alt={anime.name}
@@ -31,7 +37,10 @@ const AnimeItem = ({ anime }: AnimeItemProps) => {
             </Badge>
           </div>
           <div className="flex flex-col mt-2 gap-2">
-            <h2 className="text-xl font-bold text-primary overflow-hidden text-ellipsis text-nowrap">
+            <h2
+              onClick={handleAnimeClick}
+              className="text-xl font-bold text-primary overflow-hidden text-ellipsis text-nowrap cursor-pointer hover:underline"
+            >
               {anime.name}
             </h2>
             <p className="text-xs font-thin">{`Autor: ${anime.autor}`}</p>
