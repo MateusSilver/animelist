@@ -16,6 +16,7 @@ export default function Home() {
         </p>
       </div>
       <div className="px-5 mt-6">
+        <h2 className="text-xs uppercase font-bold mb-5">Últimos animes</h2>
         <AnimeItem />
       </div>
     </>
