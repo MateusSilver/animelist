@@ -1,7 +1,7 @@
 import { ptBR } from "date-fns/locale";
 import Header from "../_components/header";
 import { format } from "date-fns";
-import AnimeItem from "../_components/animeItem";
+import ReviewItem from "../_components/reviewItem";
 
 export default function Home() {
   return (
@@ -16,8 +16,8 @@ export default function Home() {
         </p>
       </div>
       <div className="px-5 mt-6">
-        <h2 className="text-xs uppercase font-bold mb-5">Últimos animes</h2>
-        <AnimeItem />
+        <h2 className="text-xs uppercase font-bold mb-5">Últimas reviews</h2>
+        <ReviewItem />
       </div>
     </>
   );
