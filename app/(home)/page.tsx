@@ -22,7 +22,7 @@ export default async function Home() {
         <h2 className="text-xs uppercase font-bold mb-5">Últimas reviews</h2>
         <ReviewItem />
       </div>
-      <div className="px-5 mt-6">
+      <div className="px-5 my-6">
         <h2 className="text-xs uppercase font-bold mb-5">
           Animes Recomendados
         </h2>
