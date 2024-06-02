@@ -6,10 +6,10 @@ import { Input } from "./ui/input";
 const Search = () => {
   return (
     <div className="flex items-center gap-2">
+      <Input placeholder="Buscar animes..." className="h-10 w-[500px]" />
       <Button variant="default">
         <SearchIcon size={18} />
       </Button>
-      <Input placeholder="Buscar animes..." className="h-10" />
     </div>
   );
 };

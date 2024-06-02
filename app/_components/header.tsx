@@ -8,12 +8,10 @@ const Header = () => {
     <Card>
       <CardContent className="p-5 flex flex-row justify-between items-center">
         <h1>Anime List</h1>
-        <div className="flex flex-row gap-2">
-          <Search />
-          <Button variant={"outline"} size={"icon"}>
-            <MenuIcon size={18} />
-          </Button>
-        </div>
+        <Search />
+        <Button variant={"outline"} size={"icon"}>
+          <MenuIcon size={18} />
+        </Button>
       </CardContent>
     </Card>
   );

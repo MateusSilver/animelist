@@ -27,9 +27,7 @@ export default async function Home() {
             <ReviewItem />
           </div>
           <div className="px-5 py-6">
-            <h2 className="text-xs uppercase font-bold mb-5">
-              Animes Recomendados
-            </h2>
+            <h2 className="text-xs uppercase font-bold mb-5">Recomendados</h2>
             <div className="py-3 flex flex-row flex-wrap gap-2">
               {animes.map((anime) => (
                 <AnimeItem key={anime.id} anime={anime} />
