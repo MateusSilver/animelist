@@ -10,26 +10,32 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <div className="px-5 pt-5">
-        <h2 className="text-xl font-bold">Bem-vindo</h2>
-        <p className="capitalize text-sm">
-          {format(new Date(), "EEEE',' d 'de' MMMM 'de' yyyy", {
-            locale: ptBR,
-          })}
-        </p>
-      </div>
-      <div className="px-5 mt-6">
-        <h2 className="text-xs uppercase font-bold mb-5">Últimas reviews</h2>
-        <ReviewItem />
-      </div>
-      <div className="px-5 my-6">
-        <h2 className="text-xs uppercase font-bold mb-5">
-          Animes Recomendados
-        </h2>
-        <div className="py-3 flex flex-col gap-2">
-          {animes.map((anime) => (
-            <AnimeItem key={anime.id} anime={anime} />
-          ))}
+      <div className="flex align-center justify-center h-auto w-full">
+        <div className="max-w-[850px]">
+          <div className="px-5 pt-5">
+            <h2 className="text-xl font-bold">Bem-vindo</h2>
+            <p className="capitalize text-sm">
+              {format(new Date(), "EEEE',' d 'de' MMMM 'de' yyyy", {
+                locale: ptBR,
+              })}
+            </p>
+          </div>
+          <div className="px-5 mt-6">
+            <h2 className="text-xs uppercase font-bold mb-5">
+              Últimas reviews
+            </h2>
+            <ReviewItem />
+          </div>
+          <div className="px-5 py-6">
+            <h2 className="text-xs uppercase font-bold mb-5">
+              Animes Recomendados
+            </h2>
+            <div className="py-3 flex flex-row flex-wrap gap-2">
+              {animes.map((anime) => (
+                <AnimeItem key={anime.id} anime={anime} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

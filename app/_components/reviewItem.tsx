@@ -4,7 +4,7 @@ import { Card, CardContent } from "./ui/card";
 
 const ReviewItem = () => {
   return (
-    <Card className="w-[450px] max-h-[200px]">
+    <Card className="w-[400px] max-h-[200px]">
       <CardContent className="p-5 flex flex-row justify-between items-center w-full">
         <Avatar className="">
           <AvatarImage src="#" />
@@ -15,7 +15,7 @@ const ReviewItem = () => {
             <Badge className="bg-opacity text-primary cursor-pointer w-fit">
               TV
             </Badge>
-            <div className="w-[300px] px-2">
+            <div className="w-[250px] px-2">
               <h2 className="text-xl text-ellipsis truncate overflow-hidden">
                 Chainsaw Man
               </h2>
