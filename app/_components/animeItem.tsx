@@ -18,14 +18,16 @@ const AnimeItem = ({ anime }: AnimeItemProps) => {
     <Card className="min-w-[400px] max-w-[400px] rounded-none">
       <CardContent className=" p-0 flex flex-row">
         <div onClick={handleAnimeClick} className="w-1/3 h-full cursor-pointer">
-          <Image
-            src={anime.coverURL}
-            alt={anime.name}
-            height={0}
-            width={0}
-            sizes="100vw"
-            className="w-full rounded-none overflow-hidden"
-          />
+          <abbr title={anime.name}>
+            <Image
+              src={anime.coverURL}
+              alt={anime.name}
+              height={0}
+              width={0}
+              sizes="100vw"
+              className="w-full rounded-none overflow-hidden"
+            />
+          </abbr>
         </div>
         <div className="w-2/3 p-4">
           <div className="flex flex-row gap-2 overflow-hidden uppercase">
@@ -41,7 +43,9 @@ const AnimeItem = ({ anime }: AnimeItemProps) => {
               onClick={handleAnimeClick}
               className="text-xl font-bold text-primary overflow-hidden text-ellipsis text-nowrap cursor-pointer hover:underline"
             >
-              {anime.name}
+              <abbr className="no-underline" title={anime.name}>
+                {anime.name}
+              </abbr>
             </h2>
             <p className="text-xs font-thin">{`Autor: ${anime.autor}`}</p>
             <p className="text-xs font-thin">{`Temporada: ${anime.season}`}</p>
