@@ -9,7 +9,6 @@ export default async function Home() {
   const animes = await db.anime.findMany({});
   return (
     <>
-      <Header />
       <div className="flex align-center justify-center h-auto w-full">
         <div className="max-w-[850px]">
           <div className="px-5 pt-5">
