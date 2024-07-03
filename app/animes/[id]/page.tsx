@@ -1,8 +1,17 @@
 import { Badge } from "@/app/_components/ui/badge";
 import { Button } from "@/app/_components/ui/button";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+} from "@/app/_components/ui/dialog";
 import { db } from "@/app/_lib/prisma";
+
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
+import AddAnime from "./_components/AddAnime";
 
 interface AnimeDetailsPageProps {
   params: {
@@ -50,9 +59,21 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
           </div>
         </div>
         <div className="row-start-4 row-end-5 col-start-3 col-end-4">
-          <Button className="text-xl items-center justify-center px-5 bg-secondary hover:bg-primary hover:mt-[-2px] w-full">
-            Add
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild className="w-full">
+              <Button className="text-xl items-center justify-center px-5 bg-secondary hover:bg-primary hover:mt-[-2px] w-full">
+                Add
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="text-white text-xl font-bold">
+                Adicionar anime
+              </DialogHeader>
+              <DialogDescription>
+                <AddAnime anime={anime} />
+              </DialogDescription>
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="row-start-4 row-end-5 col-start-4 col-end-auto">
           <Button className="flex items-center justify-center flex-row gap-2 bg-primary uppercase hover:mt-[-2px]">
