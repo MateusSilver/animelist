@@ -50,12 +50,12 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
           </div>
         </div>
         <div className="row-start-4 row-end-5 col-start-3 col-end-4">
-          <Button className="text-xl px-5 bg-secondary hover:bg-primary hover:mt-[-2px] w-full">
+          <Button className="text-xl items-center justify-center px-5 bg-secondary hover:bg-primary hover:mt-[-2px] w-full">
             Add
           </Button>
         </div>
         <div className="row-start-4 row-end-5 col-start-4 col-end-auto">
-          <Button className="flex flex-row gap-2 bg-primary uppercase hover:mt-[-2px]">
+          <Button className="flex items-center justify-center flex-row gap-2 bg-primary uppercase hover:mt-[-2px]">
             Where to watch?
             <BookOpen />
           </Button>
