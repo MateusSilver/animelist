@@ -2,18 +2,58 @@
 
 import { Button } from "@/app/_components/ui/button";
 import { Form } from "@/app/_components/ui/form";
-import { Anime } from "@prisma/client";
-import { z } from "zod";
+import { useToast } from "@/app/_components/ui/use-toast";
+import { Anime, User } from "@prisma/client";
+import { useState } from "react";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import SaveReview from "../_actions/saveReview";
 
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
+  review: z.string().min(2).max(150),
+  nota: z.number().min(0).max(10),
+  status: z.string().max(50),
 });
 
 interface AddAnimeProps {
   anime: Anime;
 }
 
-const AddAnime = ({ anime }: AddAnimeProps) => {
+interface UserProps {
+  user: User;
+}
+
+const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      review: "",
+      nota: 0,
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+    try {
+      await SaveReview({
+        animeID: anime.id,
+        userID: user.id,
+        review: data.review,
+        nota: data.nota,
+        markbook: true,
+        status: data.status,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Form>
       <form>
