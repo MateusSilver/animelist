@@ -31,8 +31,37 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
   }
   return (
     <div
-      style={{ backgroundImage: `url(${anime.coverURL})` }}
-      className="bg-no-repeat bg-cover bg-center bg-gradient-to-t from-background"
+      style={{
+        backgroundImage: `url(${anime.coverURL})`,
+      }}
+      className="w-full
+            
+            
+            relative
+            overflow-hidden
+            block
+            z-10
+						
+            bg-[url('')]
+            bg-cover
+            bg-no-repeat
+            bg-center
+
+            before:content-['']
+            before:absolute
+            before:inset-0
+            before:block
+            before:bg-gradient-to-b
+            before:from-transparent
+            before:from-5%
+            before:via-[rgba(21,22,25,75%)]
+            before:via-25%
+            
+            before:to-background
+            before:to-40%
+            before:opacity-100
+            
+            before:z-[-5]"
     >
       <main className="grid grid-rows-7 grid-cols-8 gap-4">
         <div className="row-start-2 row-end-4 col-start-2 col-end-3">
@@ -88,6 +117,7 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
           <p className="text-md indent-8 text-ellipsis">{anime.sinopsis}</p>
         </div>
       </main>
+
       <aside className="grid grid-rows-1 grid-cols-8">
         <div className="col-start-2 col-end-7">
           <h2 className="text-2xl mb-4">Reviews</h2>
