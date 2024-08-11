@@ -30,7 +30,10 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
     return null;
   }
   return (
-    <div>
+    <div
+      style={{ backgroundImage: `url(${anime.coverURL})` }}
+      className="bg-no-repeat bg-cover bg-center bg-gradient-to-t from-background"
+    >
       <main className="grid grid-rows-7 grid-cols-8 gap-4">
         <div className="row-start-2 row-end-4 col-start-2 col-end-3">
           <Image
@@ -47,7 +50,7 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
           <h4 className="text-2xl">10.0</h4>
         </div>
         <div className="row-start-2 row-end-3 col-start-3 col-end-8">
-          <h1 className="text-6xl font-extrabold text-primary mb-2">
+          <h1 className=" text-6xl font-extrabold text-primary mb-2">
             {anime.name}
           </h1>
           <h2 className="text-sm">by {anime.autor}</h2>
