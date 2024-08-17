@@ -4,8 +4,11 @@ import { Button } from "@/app/_components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
+  FormItem,
   FormLabel,
+  FormMessage,
 } from "@/app/_components/ui/form";
 import { useToast } from "@/app/_components/ui/use-toast";
 import { Anime, User } from "@prisma/client";
@@ -28,7 +31,8 @@ import {
 } from "@/app/_components/ui/command";
 import { cn } from "@/app/_lib/utils";
 import React from "react";
-import { Select } from "@/app/_components/ui/select";
+import { Select, SelectContent, SelectItem } from "@/app/_components/ui/select";
+import { SelectTrigger, SelectValue } from "@radix-ui/react-select";
 
 const formSchema = z.object({
   review: z.string().min(2).max(150),
@@ -116,13 +120,48 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
           <tr>
             <td>Avaliação:</td>
             <td>
-              <FormField>
-                <FormLabel>Nota</FormLabel>
-                <Select
-                  onValueChange={Field.onChange}
-                  defaultValue={Field.value}
-                ></Select>
-              </FormField>
+              <FormField
+                control={form.control}
+                name="nota"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nota</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={"10.0"}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="10.0" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="10.0" />
+                        <SelectItem value="9.5" />
+                        <SelectItem value="9.0" />
+                        <SelectItem value="8.5" />
+                        <SelectItem value="8.0" />
+                        <SelectItem value="7.5" />
+                        <SelectItem value="7.0" />
+                        <SelectItem value="6.5" />
+                        <SelectItem value="6.0" />
+                        <SelectItem value="5.5" />
+                        <SelectItem value="5.0" />
+                        <SelectItem value="4.5" />
+                        <SelectItem value="4.0" />
+                        <SelectItem value="3.5" />
+                        <SelectItem value="3.0" />
+                        <SelectItem value="2.5" />
+                        <SelectItem value="2.0" />
+                        <SelectItem value="1.5" />
+                        <SelectItem value="1.0" />
+                        <SelectItem value="0.5" />
+                        <SelectItem value="0.0" />
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>Dê uma nota para a Obra</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </td>
           </tr>
         </table>
