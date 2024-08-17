@@ -31,8 +31,15 @@ import {
 } from "@/app/_components/ui/command";
 import { cn } from "@/app/_lib/utils";
 import React from "react";
-import { Select, SelectContent, SelectItem } from "@/app/_components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+} from "@/app/_components/ui/select";
 import { SelectTrigger, SelectValue } from "@radix-ui/react-select";
+import { Textarea } from "@/app/_components/ui/textarea";
 
 const formSchema = z.object({
   review: z.string().min(2).max(150),
@@ -117,54 +124,64 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
             <td className="py-4">Nota:</td>
             <td className="py-4"></td>
           </tr>
-          <tr>
-            <td>Avaliação:</td>
-            <td>
-              <FormField
-                control={form.control}
-                name="nota"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nota</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={"10.0"}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="10.0" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="10.0" />
-                        <SelectItem value="9.5" />
-                        <SelectItem value="9.0" />
-                        <SelectItem value="8.5" />
-                        <SelectItem value="8.0" />
-                        <SelectItem value="7.5" />
-                        <SelectItem value="7.0" />
-                        <SelectItem value="6.5" />
-                        <SelectItem value="6.0" />
-                        <SelectItem value="5.5" />
-                        <SelectItem value="5.0" />
-                        <SelectItem value="4.5" />
-                        <SelectItem value="4.0" />
-                        <SelectItem value="3.5" />
-                        <SelectItem value="3.0" />
-                        <SelectItem value="2.5" />
-                        <SelectItem value="2.0" />
-                        <SelectItem value="1.5" />
-                        <SelectItem value="1.0" />
-                        <SelectItem value="0.5" />
-                        <SelectItem value="0.0" />
-                      </SelectContent>
-                    </Select>
-                    <FormDescription>Dê uma nota para a Obra</FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </td>
-          </tr>
         </table>
+
+        <FormField
+          control={form.control}
+          name="nota"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nota</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={"10.0"}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="10.0" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Notas</SelectLabel>
+                    <SelectItem value="10.0">10.0</SelectItem>
+                    <SelectItem value="9.5">9.5</SelectItem>
+                    <SelectItem value="9.0">9.0</SelectItem>
+                    <SelectItem value="8.5">8.5</SelectItem>
+                    <SelectItem value="8.0">8.0</SelectItem>
+                    <SelectItem value="7.5">7.5</SelectItem>
+                    <SelectItem value="7.0">7.0</SelectItem>
+                    <SelectItem value="6.5">6.5</SelectItem>
+                    <SelectItem value="6.0">6.0</SelectItem>
+                    <SelectItem value="5.5">5.5</SelectItem>
+                    <SelectItem value="5.0">5.0</SelectItem>
+                    <SelectItem value="4.5">4.5</SelectItem>
+                    <SelectItem value="4.0">4.0</SelectItem>
+                    <SelectItem value="3.5">3.5</SelectItem>
+                    <SelectItem value="3.0">3.0</SelectItem>
+                    <SelectItem value="2.5">2.5</SelectItem>
+                    <SelectItem value="2.0">2.0</SelectItem>
+                    <SelectItem value="1.5">1.5</SelectItem>
+                    <SelectItem value="1.0">1.0</SelectItem>
+                    <SelectItem value="0.5">0.5</SelectItem>
+                    <SelectItem value="0.0">0.0</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <FormDescription>Dê uma nota para a Obra</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="review"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Comentário</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Escreva um comentário" />
+              </FormControl>
+              <FormDescription>Comentário sobre a obra</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button className="w-full justify-center">Submit</Button>
       </form>
