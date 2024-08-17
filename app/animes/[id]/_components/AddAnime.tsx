@@ -17,19 +17,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import SaveReview from "../_actions/saveReview";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/app/_components/ui/popover";
-import { Check, ChevronsUpDown } from "lucide-react";
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/app/_components/ui/command";
-import { cn } from "@/app/_lib/utils";
+
 import React from "react";
 import {
   Select,
@@ -40,6 +28,7 @@ import {
 } from "@/app/_components/ui/select";
 import { SelectTrigger, SelectValue } from "@radix-ui/react-select";
 import { Textarea } from "@/app/_components/ui/textarea";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   review: z.string().min(2).max(150),
@@ -49,13 +38,10 @@ const formSchema = z.object({
 
 interface AddAnimeProps {
   anime: Anime;
-}
-
-interface UserProps {
   user: User;
 }
 
-const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
+const AddAnime = ({ anime, user }: AddAnimeProps) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -67,7 +53,7 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const FormOnSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
       await SaveReview({
@@ -80,9 +66,8 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
       });
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   toast({
@@ -95,12 +80,9 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
     ),
   });
 
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={() => form.handleSubmit(FormOnSubmit)}>
         <table className="w-full my-4 text-white">
           <tr className="">
             <td className="w-1/3 py-3">Anime:</td>
@@ -120,70 +102,76 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
             <td className="py-4">Estúdio:</td>
             <td className="py-4">{anime.studio}</td>
           </tr>
-          <tr>
-            <td className="py-4">Nota:</td>
-            <td className="py-4"></td>
-          </tr>
         </table>
 
-        <FormField
-          control={form.control}
-          name="nota"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nota</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={"10.0"}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="10.0" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Notas</SelectLabel>
-                    <SelectItem value="10.0">10.0</SelectItem>
-                    <SelectItem value="9.5">9.5</SelectItem>
-                    <SelectItem value="9.0">9.0</SelectItem>
-                    <SelectItem value="8.5">8.5</SelectItem>
-                    <SelectItem value="8.0">8.0</SelectItem>
-                    <SelectItem value="7.5">7.5</SelectItem>
-                    <SelectItem value="7.0">7.0</SelectItem>
-                    <SelectItem value="6.5">6.5</SelectItem>
-                    <SelectItem value="6.0">6.0</SelectItem>
-                    <SelectItem value="5.5">5.5</SelectItem>
-                    <SelectItem value="5.0">5.0</SelectItem>
-                    <SelectItem value="4.5">4.5</SelectItem>
-                    <SelectItem value="4.0">4.0</SelectItem>
-                    <SelectItem value="3.5">3.5</SelectItem>
-                    <SelectItem value="3.0">3.0</SelectItem>
-                    <SelectItem value="2.5">2.5</SelectItem>
-                    <SelectItem value="2.0">2.0</SelectItem>
-                    <SelectItem value="1.5">1.5</SelectItem>
-                    <SelectItem value="1.0">1.0</SelectItem>
-                    <SelectItem value="0.5">0.5</SelectItem>
-                    <SelectItem value="0.0">0.0</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <FormDescription>Dê uma nota para a Obra</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="review"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Comentário</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Escreva um comentário" />
-              </FormControl>
-              <FormDescription>Comentário sobre a obra</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button className="w-full justify-center">Submit</Button>
+        <div className="w-full py-2 ">
+          <FormField
+            control={form.control}
+            name="nota"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Nota</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={"10.0"}>
+                  <FormControl>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue {...field} placeholder="10.0" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel></SelectLabel>
+                      <SelectItem value="10.0">10.0</SelectItem>
+                      <SelectItem value="9.5">9.5</SelectItem>
+                      <SelectItem value="9.0">9.0</SelectItem>
+                      <SelectItem value="8.5">8.5</SelectItem>
+                      <SelectItem value="8.0">8.0</SelectItem>
+                      <SelectItem value="7.5">7.5</SelectItem>
+                      <SelectItem value="7.0">7.0</SelectItem>
+                      <SelectItem value="6.5">6.5</SelectItem>
+                      <SelectItem value="6.0">6.0</SelectItem>
+                      <SelectItem value="5.5">5.5</SelectItem>
+                      <SelectItem value="5.0">5.0</SelectItem>
+                      <SelectItem value="4.5">4.5</SelectItem>
+                      <SelectItem value="4.0">4.0</SelectItem>
+                      <SelectItem value="3.5">3.5</SelectItem>
+                      <SelectItem value="3.0">3.0</SelectItem>
+                      <SelectItem value="2.5">2.5</SelectItem>
+                      <SelectItem value="2.0">2.0</SelectItem>
+                      <SelectItem value="1.5">1.5</SelectItem>
+                      <SelectItem value="1.0">1.0</SelectItem>
+                      <SelectItem value="0.5">0.5</SelectItem>
+                      <SelectItem value="0.0">0.0</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="review"
+            render={() => (
+              <FormItem>
+                <FormLabel>Comentário</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Escreva um comentário" />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full justify-center"
+          >
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
