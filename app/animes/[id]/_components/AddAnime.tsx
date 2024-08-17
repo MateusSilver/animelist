@@ -1,7 +1,12 @@
 "use client";
 
 import { Button } from "@/app/_components/ui/button";
-import { Form, FormControl, FormField, FormLabel } from "@/app/_components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormLabel,
+} from "@/app/_components/ui/form";
 import { useToast } from "@/app/_components/ui/use-toast";
 import { Anime, User } from "@prisma/client";
 import { useState } from "react";
@@ -9,10 +14,21 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import SaveReview from "../_actions/saveReview";
-import { Popover, PopoverContent, PopoverTrigger } from "@/app/_components/ui/popover";
-import { ChevronsUpDown } from "lucide-react";
-import { Command, CommandGroup, CommandItem, CommandList } from "@/app/_components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/app/_components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
+import {
+  Command,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from "@/app/_components/ui/command";
 import { cn } from "@/app/_lib/utils";
+import React from "react";
+import { Select } from "@/app/_components/ui/select";
 
 const formSchema = z.object({
   review: z.string().min(2).max(150),
@@ -68,8 +84,8 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
     ),
   });
 
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   return (
     <Form {...form}>
@@ -100,43 +116,12 @@ const AddAnime = ({ anime }: AddAnimeProps, { user }: UserProps) => {
           <tr>
             <td>Avaliação:</td>
             <td>
-              <FormField
-                control={form.control}
-                name="review"
-                render={({ field }) => (
-                  <FormLabel>Adicionar comentário</FormLabel>
-                  <FormControl>
-                    <Popover open={open} onOpenChange={setOpen}>
-                      <PopoverTrigger asChild>
-                        <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">{value ? value : "Adicionar Framework"}<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50"></Button>
-                      </PopoverTrigger>
-                      <PopoverContent>
-                        <Command>
-                          <CommandList>
-                            <CommandGroup>
-                              <CommandItem
-                                key={0.0}
-                                value={"0.0"}
-                                onSelect={(currentValue) => { setValue(currentValue === value ? "" : currentValue)
-                                  setOpen(false)
-                                }
-                              >
-                              <Check className={cn("mr-2 h-4 w-4", value === value ? "opacity-100" : "opacity-0")} />
-
-                              </CommandItem>
-                            </CommandGroup>
-                          </CommandList>
-                        </Command>
-                      </PopoverContent>
-                    </Popover>
-                  </FormControl>
-                )}
-              >
-                <textarea
-                  className="bg-secondary w-full"
-                  name=""
-                  id=""
-                ></textarea>
+              <FormField>
+                <FormLabel>Nota</FormLabel>
+                <Select
+                  onValueChange={Field.onChange}
+                  defaultValue={Field.value}
+                ></Select>
               </FormField>
             </td>
           </tr>
