@@ -113,7 +113,10 @@ const AddAnime = ({ anime, user }: AddAnimeProps) => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel htmlFor="Nota">Nota</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue="10.0">
+                <Select
+                  onValueChange={(value) => field.onChange(parseFloat(value))}
+                  defaultValue="10.0"
+                >
                   <FormControl>
                     <SelectTrigger
                       id="Nota"
