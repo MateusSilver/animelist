@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/app/_components/ui/button";
-
 import {
   Form,
   FormControl,
@@ -65,44 +64,46 @@ const AddAnime = ({ anime, user }: AddAnimeProps) => {
         markbook: true,
         status: data.status,
       });
+
+      toast({
+        title: "Anime Adicionado à lista",
+        description: (
+          <div className="px-5 py-6">
+            <p className="text-primary">{anime.name}</p>
+            <p>Adicionado</p>
+          </div>
+        ),
+      });
     } catch (error) {
       console.error(error);
     }
     setIsLoading(false);
   };
 
-  toast({
-    title: "Anime Adicionado à lista",
-    description: (
-      <div className="px-5 py-6">
-        <p className="text-primary">{anime.name}</p>
-        <p>Adicionado</p>
-      </div>
-    ),
-  });
-
   return (
     <Form {...form}>
-      <form onSubmit={() => form.handleSubmit(FormOnSubmit)}>
+      <form onSubmit={form.handleSubmit(FormOnSubmit)}>
         <table className="w-full my-4 text-white">
-          <tr className="">
-            <td className="w-1/3 py-3">Anime:</td>
-            <td className="w-2/3 py-3">
-              <p className="text-primary hover:underline">{anime.name}</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-4">Temporada:</td>
-            <td className="py-4">{anime.season}</td>
-          </tr>
-          <tr>
-            <td className="py-4">Tipo:</td>
-            <td className="py-4">{anime.type}</td>
-          </tr>
-          <tr>
-            <td className="py-4">Estúdio:</td>
-            <td className="py-4">{anime.studio}</td>
-          </tr>
+          <tbody>
+            <tr className="">
+              <td className="w-1/3 py-3">Anime:</td>
+              <td className="w-2/3 py-3">
+                <p className="text-primary hover:underline">{anime.name}</p>
+              </td>
+            </tr>
+            <tr>
+              <td className="py-4">Temporada:</td>
+              <td className="py-4">{anime.season}</td>
+            </tr>
+            <tr>
+              <td className="py-4">Tipo:</td>
+              <td className="py-4">{anime.type}</td>
+            </tr>
+            <tr>
+              <td className="py-4">Estúdio:</td>
+              <td className="py-4">{anime.studio}</td>
+            </tr>
+          </tbody>
         </table>
 
         <div className="w-full py-2 ">
@@ -156,11 +157,11 @@ const AddAnime = ({ anime, user }: AddAnimeProps) => {
           <FormField
             control={form.control}
             name="review"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Comentário</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Escreva um comentário" />
+                  <Textarea {...field} placeholder="Escreva um comentário" />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
