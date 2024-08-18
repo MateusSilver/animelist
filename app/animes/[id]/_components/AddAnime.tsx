@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/app/_components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -110,14 +111,17 @@ const AddAnime = ({ anime, user }: AddAnimeProps) => {
             name="nota"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Nota</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={"10.0"}>
+                <FormLabel htmlFor="Nota">Nota</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue="10.0">
                   <FormControl>
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger
+                      id="Nota"
+                      className="w-[180px] bg-foreground"
+                    >
                       <SelectValue {...field} placeholder="10.0" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent position="popper">
                     <SelectGroup>
                       <SelectLabel></SelectLabel>
                       <SelectItem value="10.0">10.0</SelectItem>
