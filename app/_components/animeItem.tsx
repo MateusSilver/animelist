@@ -4,12 +4,14 @@ import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface AnimeItemProps {
   anime: Anime;
 }
 
 const AnimeItem = ({ anime }: AnimeItemProps) => {
+  const { data } = useSession();
   const router = useRouter();
   const handleAnimeClick = () => {
     router.push(`animes/${anime.id}`);
@@ -49,6 +51,7 @@ const AnimeItem = ({ anime }: AnimeItemProps) => {
             </h2>
             <p className="text-xs font-thin">{`Autor: ${anime.autor}`}</p>
             <p className="text-xs font-thin">{`Temporada: ${anime.season}`}</p>
+            <p className="text-xs font-thin">{`Add to ${data?.user?.name}?`}</p>
           </div>
         </div>
       </CardContent>

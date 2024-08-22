@@ -13,11 +13,16 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
+import { signIn } from "next-auth/react";
 
 const Header = () => {
   const router = useRouter();
   const handleLogoClick = () => {
     router.push(`/`);
+  };
+
+  const handleLoginClick = async () => {
+    await signIn();
   };
   return (
     <Card>
@@ -57,6 +62,7 @@ const Header = () => {
                     Todos os Animes
                   </Button>
                   <Button
+                    onClick={handleLoginClick}
                     variant={"outline"}
                     className="border-2 border-secondary gap-2 hover:bg-primary hover:border-primary"
                   >
