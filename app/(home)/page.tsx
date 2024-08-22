@@ -1,11 +1,11 @@
 import { ptBR } from "date-fns/locale";
 import { format } from "date-fns";
 import ReviewItem from "../_components/reviewItem";
-import { db } from "../_lib/prisma";
+import { prismaClient } from "../_lib/prisma";
 import AnimeItem from "../_components/animeItem";
 
 export default async function Home() {
-  const animes = await db.anime.findMany({});
+  const animes = await prismaClient.anime.findMany({});
   return (
     <>
       <div className="flex align-center justify-center h-auto w-full">

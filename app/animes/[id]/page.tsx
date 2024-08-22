@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/app/_components/ui/dialog";
-import { db } from "@/app/_lib/prisma";
+import { prismaClient } from "@/app/_lib/prisma";
 
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
@@ -20,7 +20,7 @@ interface AnimeDetailsPageProps {
 }
 
 const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
-  const anime = await db.anime.findUnique({
+  const anime = await prismaClient.anime.findUnique({
     where: {
       id: params.id,
     },
@@ -102,7 +102,7 @@ const AnimeDetailsPage = async ({ params }: AnimeDetailsPageProps) => {
                 Adicionar anime
               </DialogHeader>
               <DialogDescription>
-                <AddAnime anime={anime} />
+                <AddAnime anime={anime} user={undefined} />
               </DialogDescription>
             </DialogContent>
           </Dialog>
