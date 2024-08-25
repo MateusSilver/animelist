@@ -21,9 +21,8 @@ const Header = () => {
     router.push(`/`);
   };
 
-  const handleLoginClick = async () => {
-    await signIn();
-  };
+  const handleLoginClick = () => signIn("google");
+
   return (
     <Card>
       <CardContent className="p-5 flex flex-row justify-between items-center">
